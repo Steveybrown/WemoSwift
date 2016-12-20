@@ -4,7 +4,7 @@ import Console
 extension FileManager {
     
     public static var wemoConfigFileName: String { return "wemoConfig.json" }
-    public static var wemoConfigPath: String { return "/Users/stephen/desktop/wemoConfig.json" }
+    public static var wemoConfigPath: String { return NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] + "/" + wemoConfigFileName }
     private static var console: ConsoleProtocol { return Terminal(arguments: CommandLine.arguments) }
 
     public static func saveDeviceInfoFor(_ devices: [String: String]) {
