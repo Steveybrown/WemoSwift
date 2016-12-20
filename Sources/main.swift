@@ -2,6 +2,11 @@ import Commander
 import Foundation
 
 let allActions = Group {    
+    $0.command("setup") {
+        let configCommand = ConfigureCommand()
+        configCommand.run()
+    }
+    
     $0.command("on") { (ip:String) in
         let offCommand = BinaryCommand(host: ip, type: .on)
         offCommand.run()

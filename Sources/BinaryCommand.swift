@@ -1,15 +1,13 @@
 import Commander
 import Foundation
 
-let OffPayload = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\" s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"><s:Body><u:SetBinaryState xmlns:u=\"urn:Belkin:service:basicevent:1\"><BinaryState>0</BinaryState></u:SetBinaryState></s:Body></s:Envelope>"
-
-let OnPayload = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\" s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"><s:Body><u:SetBinaryState xmlns:u=\"urn:Belkin:service:basicevent:1\"><BinaryState>1</BinaryState></u:SetBinaryState></s:Body></s:Envelope>"
-
 class BinaryCommand: CommandType {
     public enum BinaryType { case on, off }
     
     private var host: String
     private var type: BinaryType
+    private let OffPayload = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\" s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"><s:Body><u:SetBinaryState xmlns:u=\"urn:Belkin:service:basicevent:1\"><BinaryState>0</BinaryState></u:SetBinaryState></s:Body></s:Envelope>".data(using: String.Encoding.utf8)
+    private let OnPayload = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\" s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"><s:Body><u:SetBinaryState xmlns:u=\"urn:Belkin:service:basicevent:1\"><BinaryState>1</BinaryState></u:SetBinaryState></s:Body></s:Envelope>".data(using: String.Encoding.utf8)
     
     init(host: String, type: BinaryType) {
         self.host = host
@@ -25,9 +23,9 @@ class BinaryCommand: CommandType {
             req.addValue("\"urn:Belkin:service:basicevent:1#SetBinaryState\"", forHTTPHeaderField: "SOAPACTION")
             switch self.type {
             case .off:
-                req.httpBody = OffPayload.data(using: String.Encoding.utf8, allowLossyConversion: false)
+                req.httpBody = OffPayload
             case .on:
-                req.httpBody = OnPayload.data(using: String.Encoding.utf8, allowLossyConversion: false)
+                req.httpBody = OnPayload
             }
             
             let session = URLSession.shared

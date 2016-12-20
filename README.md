@@ -17,3 +17,14 @@ This generates you an executable file in .build/debug/Wemo
 ```
 ./Wemo off {{ip of switch}} 
 ```
+
+
+### How to wemo globally
+
+To run the wemo script globally add a bin folder in your home directory and link it in your bash profile.
+```bash
+export PATH=$PATH:$HOME/bin
+``` 
+Place the wemo executable in the folder. This should allow you to run Wemo [command] globally. 
+Dont forget to source against your profile :) 
+
