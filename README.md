@@ -26,5 +26,9 @@ To run the wemo script globally add a bin folder in your home directory and link
 export PATH=$PATH:$HOME/bin
 ``` 
 Place the wemo executable in the folder. This should allow you to run Wemo [command] globally. 
-Dont forget to source against your profile :) 
 
+This will allow you to run
+```bash
+wemo off bedroom-light
+```
+Dont forget to source against your profile :) 
